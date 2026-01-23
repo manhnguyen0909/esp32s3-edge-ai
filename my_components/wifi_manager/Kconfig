@@ -1,0 +1,21 @@
+menu "WiFi Configuration"
+
+    config WIFI_SSID
+        string "WIFI_SSID"
+        default "TPLINK"
+        help
+            Nhập tên mạng WiFi mà ESP32 sẽ kết nối.
+
+    config WIFI_PASSWORD
+        string "WIFI_PASSWORD"
+        default "12345678"
+        help
+            Nhập mật khẩu mạng WiFi.
+
+    config WIFI_MAX_RETRY
+        int "Maximum Retry"
+        default 5
+        help
+            Số lần thử kết nối lại tối đa trước khi báo lỗi.
+
+endmenu

@@ -1,0 +1,556 @@
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x1 (POWERON),boot:0x28 (SPI_FAST_FLASH_BOOT)
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce3820,len:0x19fc
+load:0x403c9700,len:0x4
+load:0x403c9704,len:0xe8c
+load:0x403cc700,len:0x3154
+entry 0x403c9940
+[0;32mI (27) boot: ESP-IDF v5.2.6-dirty 2nd stage bootloader[0m
+[0;32mI (27) boot: compile time Jan 23 2026 14:18:28[0m
+[0;32mI (27) boot: Multicore bootloader[0m
+[0;32mI (30) boot: chip revision: v0.1[0m
+[0;32mI (34) boot: efuse block revision: v1.2[0m
+[0;32mI (39) qio_mode: Enabling default flash chip QIO[0m
+[0;32mI (44) boot.esp32s3: Boot SPI Speed : 80MHz[0m
+[0;32mI (49) boot.esp32s3: SPI Mode       : QIO[0m
+[0;32mI (54) boot.esp32s3: SPI Flash Size : 4MB[0m
+[0;32mI (58) boot: Enabling RNG early entropy source...[0m
+[0;32mI (64) boot: Partition Table:[0m
+[0;32mI (67) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (75) boot:  0 nvs              WiFi data        01 02 00011000 00006000[0m
+[0;32mI (82) boot:  1 phy_init         RF data          01 01 00017000 00001000[0m
+[0;32mI (90) boot:  2 factory          factory app      00 00 00020000 00100000[0m
+[0;32mI (97) boot: End of partition table[0m
+[0;32mI (101) esp_image: segment 0: paddr=00020020 vaddr=3c0a0020 size=20e8ch (134796) map[0m
+[0;32mI (130) esp_image: segment 1: paddr=00040eb4 vaddr=3fc9c000 size=073a0h ( 29600) load[0m
+[0;32mI (135) esp_image: segment 2: paddr=0004825c vaddr=40374000 size=07dbch ( 32188) load[0m
+[0;32mI (142) esp_image: segment 3: paddr=00050020 vaddr=42000020 size=98a64h (625252) map[0m
+[0;32mI (237) esp_image: segment 4: paddr=000e8a8c vaddr=4037bdbc size=10178h ( 65912) load[0m
+[0;32mI (260) boot: Loaded app from partition at offset 0x20000[0m
+[0;32mI (260) boot: Disabling RNG early entropy source...[0m
+[0;32mI (271) cpu_start: Multicore app[0m
+[0;32mI (272) octal_psram: vendor id    : 0x0d (AP)[0m
+[0;32mI (272) octal_psram: dev id       : 0x02 (generation 3)[0m
+[0;32mI (275) octal_psram: density      : 0x03 (64 Mbit)[0m
+[0;32mI (280) octal_psram: good-die     : 0x01 (Pass)[0m
+[0;32mI (286) octal_psram: Latency      : 0x01 (Fixed)[0m
+[0;32mI (291) octal_psram: VCC          : 0x01 (3V)[0m
+[0;32mI (296) octal_psram: SRF          : 0x01 (Fast Refresh)[0m
+[0;32mI (302) octal_psram: BurstType    : 0x01 (Hybrid Wrap)[0m
+[0;32mI (308) octal_psram: BurstLen     : 0x01 (32 Byte)[0m
+[0;32mI (313) octal_psram: Readlatency  : 0x02 (10 cycles@Fixed)[0m
+[0;32mI (319) octal_psram: DriveStrength: 0x00 (1/1)[0m
+[0;32mI (324) esp_psram: Found 8MB PSRAM device[0m
+[0;32mI (329) esp_psram: Speed: 40MHz[0m
+[0;32mI (1064) esp_psram: SPI SRAM memory test OK[0m
+[0;32mI (1073) cpu_start: Pro cpu start user code[0m
+[0;32mI (1073) cpu_start: cpu freq: 240000000 Hz[0m
+[0;32mI (1073) cpu_start: Application information:[0m
+[0;32mI (1076) cpu_start: Project name:     cadpro_motion_detection_esp32s3[0m
+[0;32mI (1083) cpu_start: App version:      ae5b22c[0m
+[0;32mI (1088) cpu_start: Compile time:     Jan 23 2026 14:17:36[0m
+[0;32mI (1094) cpu_start: ELF file SHA256:  7d8b18e29...[0m
+[0;32mI (1100) cpu_start: ESP-IDF:          v5.2.6-dirty[0m
+[0;32mI (1105) cpu_start: Min chip rev:     v0.0[0m
+[0;32mI (1110) cpu_start: Max chip rev:     v0.99 [0m
+[0;32mI (1115) cpu_start: Chip rev:         v0.1[0m
+[0;32mI (1120) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (1127) heap_init: At 3FCA9720 len 0003FFF0 (255 KiB): RAM[0m
+[0;32mI (1133) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
+[0;32mI (1139) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (1146) heap_init: At 600FE010 len 00001FD8 (7 KiB): RTCRAM[0m
+[0;32mI (1152) esp_psram: Adding pool of 8192K of PSRAM memory to heap allocator[0m
+[0;32mI (1160) spi_flash: detected chip: generic[0m
+[0;32mI (1164) spi_flash: flash io: qio[0m
+[0;33mW (1168) spi_flash: Detected size(8192k) larger than the size in the binary image header(4096k). Using the size in the binary image header.[0m
+[0;33mW (1182) i2c: This driver is an old driver, please migrate your application code to adapt `driver/i2c_master.h`[0m
+[0;32mI (1192) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (1199) sleep: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (1207) main_task: Started on CPU0[0m
+[0;32mI (1211) esp_psram: Reserving pool of 32K of internal memory for DMA/internal allocations[0m
+[0;32mI (1220) main_task: Calling app_main()[0m
+[0;32mI (1269) s3 ll_cam: DMA Channel=0[0m
+[0;32mI (1269) cam_hal: cam init ok[0m
+[0;32mI (1269) sccb: pin_sda 42 pin_scl 41[0m
+[0;32mI (1270) sccb: sccb_i2c_port=1[0m
+[0;32mI (1286) camera: Camera PID=0x26 VER=0x42 MIDL=0x7f MIDH=0xa2[0m
+[0;32mI (1287) camera: Detected OV2640 camera[0m
+[0;32mI (1287) camera: Detected camera at address=0x30[0m
+[0;32mI (1370) cam_hal: PSRAM DMA mode disabled[0m
+[0;32mI (1370) s3 ll_cam: node_size: 3840, nodes_per_line: 1, lines_per_node: 6[0m
+[0;32mI (1371) s3 ll_cam: dma_half_buffer_min:  3840, dma_half_buffer: 15360, lines_per_half_buffer: 24, dma_buffer_size: 30720[0m
+[0;32mI (1382) cam_hal: buffer_size: 30720, half_buffer_size: 15360, node_buffer_size: 3840, node_cnt: 8, total_cnt: 10[0m
+[0;32mI (1394) cam_hal: Allocating 76800 Byte frame buffer in PSRAM[0m
+[0;32mI (1400) cam_hal: Allocating 76800 Byte frame buffer in PSRAM[0m
+[0;32mI (1406) cam_hal: Allocating 76800 Byte frame buffer in PSRAM[0m
+[0;32mI (1413) cam_hal: Allocating 76800 Byte frame buffer in PSRAM[0m
+[0;32mI (1419) cam_hal: cam config ok[0m
+[0;32mI (1423) ov2640: Set PLL: clk_2x: 1, clk_div: 3, pclk_auto: 1, pclk_div: 8[0m
+[0;32mI (1500) CAM_DRIVER: Camera Init Success[0m
+[0;32mI (1502) pp: pp rom version: e7ae62f[0m
+[0;32mI (1502) net80211: net80211 rom version: e7ae62f[0m
+[0;32mI (1505) wifi:wifi driver task: 3fcc3f68, prio:23, stack:6656, core=0[0m
+[0;32mI (1512) wifi:wifi firmware version: e851349[0m
+[0;32mI (1514) wifi:wifi certification version: v7.0[0m
+[0;32mI (1518) wifi:config NVS flash: enabled[0m
+[0;32mI (1521) wifi:config nano formating: disabled[0m
+[0;32mI (1525) wifi:Init data frame dynamic rx buffer num: 64[0m
+[0;32mI (1530) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (1535) wifi:Init management short buffer num: 32[0m
+[0;32mI (1539) wifi:Init dynamic tx buffer num: 64[0m
+[0;32mI (1543) wifi:Init static tx FG buffer num: 2[0m
+[0;32mI (1547) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (1551) wifi:Init static rx buffer num: 18[0m
+[0;32mI (1555) wifi:Init dynamic rx buffer num: 64[0m
+[0;32mI (1560) wifi_init: rx ba win: 32[0m
+[0;32mI (1563) wifi_init: tcpip mbox: 32[0m
+[0;32mI (1567) wifi_init: udp mbox: 6[0m
+[0;32mI (1571) wifi_init: tcp mbox: 6[0m
+[0;32mI (1575) wifi_init: tcp tx win: 5760[0m
+[0;32mI (1579) wifi_init: tcp rx win: 5760[0m
+[0;32mI (1583) wifi_init: tcp mss: 1440[0m
+[0;32mI (1587) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (1592) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (1598) wifi:ifx:0, phymode(new:0x2, nvs:0x3)[0m
+[0;32mI (1614) phy_init: phy_version 701,f4f1da3a,Mar  3 2025,15:50:10[0m
+[0;33mW (1614) phy_init: failed to load RF calibration data (0x1102), falling back to full calibration[0m
+[0;32mI (1650) phy_init: Saving new calibration data due to checksum failure or outdated calibration data, mode(2)[0m
+cam_hal: EV-EOF-OVF
+[0;32mI (1706) wifi:mode : sta (68:b6:b3:20:13:20)[0m
+[0;32mI (1706) wifi:enable tsf[0m
+[0;32mI (1707) wifi:Set ps type: 0, coexist: 0[0m
+
+[0;32mI (1709) WIFI_MGR: Connecting to WiFi...[0m
+cam_hal: FB-SIZE: 38400 != 76800
+[0;32mI (3008) wifi:new:<11,0>, old:<1,0>, ap:<255,255>, sta:<11,0>, prof:1[0m
+[0;32mI (3009) wifi:state: init -> auth (b0)[0m
+[0;32mI (3023) wifi:state: auth -> assoc (0)[0m
+[0;32mI (3038) wifi:state: assoc -> run (10)[0m
+[0;32mI (3073) wifi:connected with TPLINK24G, aid = 1, channel 11, BW20, bssid = 90:a7:c1:02:f6:a1[0m
+[0;32mI (3073) wifi:security: WPA2-PSK, phy: bg, rssi: -50[0m
+[0;32mI (3082) wifi:pm start, type: 0[0m
+
+[0;32mI (3082) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us[0m
+[0;32mI (3086) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000[0m
+[0;32mI (3094) wifi:dp: 2, bi: 102400, li: 4, scale listen interval from 307200 us to 409600 us[0m
+[0;32mI (3102) wifi:AP's beacon interval = 102400 us, DTIM period = 2[0m
+[0;32mI (4109) esp_netif_handlers: sta ip: 192.168.40.126, mask: 255.255.255.0, gw: 192.168.40.1[0m
+[0;32mI (4710) WIFI_MGR: Got IP: 192.168.40.126[0m
+[0;32mI (4710) MAIN_APP: Motion Task Started (No OLED)[0m
+[0;32mI (4712) HTTP_STREAM: HTTP Server Started at port 80[0m
+[0;32mI (4714) MAIN_APP: System Started - OLED Removed[0m
+[0;32mI (4720) main_task: Returned from app_main()[0m
+[0;32mI (13242) MAIN_APP: New Object ID=1[0m
+[0;32mI (13373) MAIN_APP: New Object ID=2[0m
+[0;32mI (13763) MAIN_APP: New Object ID=3[0m
+[0;32mI (13764) MAIN_APP: New Object ID=4[0m
+[0;32mI (13764) MAIN_APP: New Object ID=5[0m
+[0;32mI (13765) MAIN_APP: New Object ID=6[0m
+[0;32mI (13769) MAIN_APP: New Object ID=7[0m
+[0;32mI (13773) MAIN_APP: New Object ID=8[0m
+[0;32mI (13778) MAIN_APP: New Object ID=9[0m
+[0;32mI (13782) MAIN_APP: New Object ID=10[0m
+[0;32mI (14671) MAIN_APP: Removed ID=10[0m
+[0;32mI (14672) MAIN_APP: Removed ID=9[0m
+[0;32mI (14672) MAIN_APP: Removed ID=8[0m
+[0;32mI (14672) MAIN_APP: Removed ID=7[0m
+[0;32mI (14676) MAIN_APP: Removed ID=6[0m
+[0;32mI (14680) MAIN_APP: Removed ID=5[0m
+[0;32mI (14684) MAIN_APP: Removed ID=4[0m
+[0;32mI (14688) MAIN_APP: Removed ID=3[0m
+[0;32mI (14931) MAIN_APP: Removed ID=2[0m
+[0;32mI (15061) MAIN_APP: Removed ID=1[0m
+[0;32mI (35853) MAIN_APP: New Object ID=11[0m
+[0;32mI (37023) MAIN_APP: Removed ID=11[0m
+[0;32mI (40532) MAIN_APP: New Object ID=12[0m
+[0;32mI (40791) MAIN_APP: New Object ID=13[0m
+[0;32mI (41701) MAIN_APP: Removed ID=12[0m
+[0;32mI (42481) MAIN_APP: New Object ID=14[0m
+[0;32mI (43390) MAIN_APP: Removed ID=14[0m
+[0;32mI (44040) MAIN_APP: New Object ID=15[0m
+[0;32mI (44950) MAIN_APP: Removed ID=15[0m
+[0;32mI (49628) MAIN_APP: New Object ID=16[0m
+[0;32mI (49628) MAIN_APP: Removed ID=13[0m
+[0;32mI (49888) MAIN_APP: New Object ID=17[0m
+[0;32mI (50797) MAIN_APP: New Object ID=18[0m
+[0;32mI (51057) MAIN_APP: New Object ID=19[0m
+[0;32mI (51967) MAIN_APP: New Object ID=20[0m
+[0;32mI (52097) MAIN_APP: Removed ID=19[0m
+[0;32mI (52097) MAIN_APP: Removed ID=18[0m
+[0;32mI (52097) MAIN_APP: Removed ID=17[0m
+[0;32mI (52747) MAIN_APP: Removed ID=16[0m
+[0;32mI (53656) MAIN_APP: New Object ID=21[0m
+[0;32mI (54436) MAIN_APP: New Object ID=22[0m
+[0;32mI (54566) MAIN_APP: Removed ID=21[0m
+[0;32mI (54956) MAIN_APP: New Object ID=23[0m
+[0;32mI (55345) MAIN_APP: Removed ID=22[0m
+[0;32mI (55996) MAIN_APP: Removed ID=23[0m
+[0;32mI (55996) MAIN_APP: Removed ID=20[0m
+[0;32mI (56775) MAIN_APP: New Object ID=24[0m
+[0;32mI (57555) MAIN_APP: New Object ID=25[0m
+[0;32mI (60543) MAIN_APP: New Object ID=26[0m
+[0;32mI (62493) MAIN_APP: Removed ID=26[0m
+[0;32mI (62622) MAIN_APP: Removed ID=24[0m
+[0;32mI (63272) MAIN_APP: New Object ID=27[0m
+[0;32mI (64182) MAIN_APP: Removed ID=27[0m
+[0;32mI (64182) MAIN_APP: Removed ID=25[0m
+[0;32mI (64572) MAIN_APP: New Object ID=28[0m
+[0;32mI (64572) MAIN_APP: New Object ID=29[0m
+[0;32mI (65482) MAIN_APP: New Object ID=30[0m
+[0;32mI (65482) MAIN_APP: New Object ID=31[0m
+[0;32mI (65871) MAIN_APP: New Object ID=32[0m
+[0;32mI (66391) MAIN_APP: Removed ID=29[0m
+[0;32mI (66521) MAIN_APP: Removed ID=31[0m
+[0;32mI (66651) MAIN_APP: Removed ID=28[0m
+[0;32mI (66781) MAIN_APP: Removed ID=32[0m
+[0;32mI (66781) MAIN_APP: Removed ID=30[0m
+[0;32mI (116551) MAIN_APP: New Object ID=33[0m
+[0;32mI (116551) MAIN_APP: New Object ID=34[0m
+[0;32mI (117591) MAIN_APP: Removed ID=34[0m
+[0;32mI (118371) MAIN_APP: New Object ID=35[0m
+[0;32mI (119280) MAIN_APP: Removed ID=35[0m
+[0;32mI (119540) MAIN_APP: New Object ID=36[0m
+[0;32mI (120060) MAIN_APP: New Object ID=37[0m
+[0;32mI (120060) MAIN_APP: New Object ID=38[0m
+[0;32mI (120839) MAIN_APP: Removed ID=33[0m
+[0;32mI (120969) MAIN_APP: Removed ID=37[0m
+[0;32mI (120969) MAIN_APP: Removed ID=36[0m
+[0;32mI (129546) MAIN_APP: New Object ID=39[0m
+[0;32mI (130845) MAIN_APP: New Object ID=40[0m
+[0;32mI (130975) MAIN_APP: New Object ID=41[0m
+[0;32mI (131105) MAIN_APP: New Object ID=42[0m
+[0;32mI (132275) MAIN_APP: Removed ID=42[0m
+[0;32mI (132535) MAIN_APP: Removed ID=40[0m
+[0;32mI (133444) MAIN_APP: Removed ID=41[0m
+[0;32mI (133964) MAIN_APP: New Object ID=43[0m
+[0;32mI (135004) MAIN_APP: Removed ID=43[0m
+[0;32mI (135004) MAIN_APP: Removed ID=39[0m
+[0;32mI (136433) MAIN_APP: New Object ID=44[0m
+[0;32mI (137213) MAIN_APP: New Object ID=45[0m
+[0;32mI (137213) MAIN_APP: New Object ID=46[0m
+[0;32mI (137213) MAIN_APP: New Object ID=47[0m
+[0;32mI (137215) MAIN_APP: New Object ID=48[0m
+[0;32mI (137220) MAIN_APP: New Object ID=49[0m
+[0;32mI (138122) MAIN_APP: Removed ID=48[0m
+[0;32mI (138122) MAIN_APP: Removed ID=44[0m
+[0;32mI (138123) MAIN_APP: Removed ID=38[0m
+[0;32mI (138252) MAIN_APP: Removed ID=49[0m
+[0;32mI (138252) MAIN_APP: Removed ID=47[0m
+[0;32mI (138253) MAIN_APP: Removed ID=45[0m
+[0;32mI (138512) MAIN_APP: New Object ID=50[0m
+[0;32mI (139422) MAIN_APP: New Object ID=51[0m
+[0;32mI (140072) MAIN_APP: New Object ID=52[0m
+[0;32mI (140461) MAIN_APP: Removed ID=46[0m
+[0;32mI (141241) MAIN_APP: New Object ID=53[0m
+[0;32mI (141241) MAIN_APP: New Object ID=54[0m
+[0;32mI (141371) MAIN_APP: Removed ID=52[0m
+[0;32mI (141631) MAIN_APP: Removed ID=50[0m
+[0;32mI (142152) MAIN_APP: New Object ID=55[0m
+[0;32mI (142152) MAIN_APP: Removed ID=54[0m
+[0;32mI (142152) MAIN_APP: Removed ID=53[0m
+[0;32mI (143061) MAIN_APP: Removed ID=55[0m
+[0;32mI (143190) MAIN_APP: New Object ID=56[0m
+[0;32mI (143191) MAIN_APP: New Object ID=57[0m
+[0;32mI (144620) MAIN_APP: Removed ID=56[0m
+[0;32mI (144620) MAIN_APP: Removed ID=51[0m
+[0;32mI (145399) MAIN_APP: Removed ID=57[0m
+[0;32mI (145789) MAIN_APP: New Object ID=58[0m
+[0;32mI (147869) MAIN_APP: New Object ID=59[0m
+[0;32mI (148778) MAIN_APP: Removed ID=58[0m
+[0;32mI (149298) MAIN_APP: Removed ID=59[0m
+[0;33mW (495383) httpd_txrx: httpd_sock_err: error in send : 104[0m
+[0;33mW (495384) httpd_uri: httpd_uri: uri handler execution failed[0m
+[0;32mI (497819) MAIN_APP: New Object ID=60[0m
+[0;32mI (497949) MAIN_APP: New Object ID=61[0m
+[0;32mI (498079) MAIN_APP: New Object ID=62[0m
+[0;32mI (498079) MAIN_APP: New Object ID=63[0m
+[0;32mI (498079) MAIN_APP: New Object ID=64[0m
+[0;32mI (498081) MAIN_APP: New Object ID=65[0m
+[0;32mI (498086) MAIN_APP: New Object ID=66[0m
+[0;32mI (498090) MAIN_APP: New Object ID=67[0m
+[0;32mI (498209) MAIN_APP: New Object ID=68[0m
+[0;32mI (498209) MAIN_APP: New Object ID=69[0m
+[0;32mI (498988) MAIN_APP: Removed ID=64[0m
+[0;32mI (499118) MAIN_APP: Removed ID=68[0m
+[0;32mI (499118) MAIN_APP: Removed ID=67[0m
+[0;32mI (500158) MAIN_APP: Removed ID=62[0m
+[0;32mI (500287) MAIN_APP: Removed ID=66[0m
+[0;32mI (500288) MAIN_APP: Removed ID=65[0m
+[0;32mI (500288) MAIN_APP: Removed ID=63[0m
+[0;32mI (501197) MAIN_APP: New Object ID=70[0m
+[0;32mI (501198) MAIN_APP: New Object ID=71[0m
+[0;32mI (501198) MAIN_APP: New Object ID=72[0m
+[0;32mI (501199) MAIN_APP: New Object ID=73[0m
+[0;32mI (501204) MAIN_APP: New Object ID=74[0m
+[0;32mI (501208) MAIN_APP: New Object ID=75[0m
+[0;32mI (501212) MAIN_APP: New Object ID=76[0m
+[0;32mI (501717) MAIN_APP: Removed ID=61[0m
+[0;32mI (502107) MAIN_APP: Removed ID=76[0m
+[0;32mI (502107) MAIN_APP: Removed ID=72[0m
+[0;32mI (502108) MAIN_APP: Removed ID=69[0m
+[0;32mI (502108) MAIN_APP: Removed ID=60[0m
+[0;32mI (502237) MAIN_APP: Removed ID=73[0m
+[0;32mI (502627) MAIN_APP: New Object ID=77[0m
+[0;32mI (502757) MAIN_APP: Removed ID=74[0m
+[0;32mI (503407) MAIN_APP: Removed ID=71[0m
+[0;32mI (503666) MAIN_APP: Removed ID=70[0m
+[0;32mI (504187) MAIN_APP: New Object ID=78[0m
+[0;32mI (504576) MAIN_APP: Removed ID=75[0m
+[0;32mI (504836) MAIN_APP: New Object ID=79[0m
+[0;32mI (504966) MAIN_APP: New Object ID=80[0m
+[0;32mI (504966) MAIN_APP: New Object ID=81[0m
+[0;32mI (505096) MAIN_APP: New Object ID=82[0m
+[0;32mI (505875) MAIN_APP: New Object ID=83[0m
+[0;32mI (505876) MAIN_APP: Removed ID=77[0m
+[0;32mI (506395) MAIN_APP: Removed ID=82[0m
+[0;32mI (506785) MAIN_APP: New Object ID=84[0m
+[0;32mI (506915) MAIN_APP: New Object ID=85[0m
+[0;32mI (506915) MAIN_APP: Removed ID=83[0m
+[0;32mI (507695) MAIN_APP: Removed ID=79[0m
+[0;32mI (507825) MAIN_APP: Removed ID=85[0m
+[0;32mI (508214) MAIN_APP: Removed ID=84[0m
+[0;32mI (509774) MAIN_APP: Removed ID=80[0m
+[0;32mI (510033) MAIN_APP: Removed ID=78[0m
+[0;32mI (512373) MAIN_APP: New Object ID=86[0m
+[0;32mI (512374) MAIN_APP: New Object ID=87[0m
+[0;32mI (512503) MAIN_APP: New Object ID=88[0m
+[0;32mI (513282) MAIN_APP: Removed ID=81[0m
+[0;32mI (513412) MAIN_APP: Removed ID=88[0m
+[0;32mI (513412) MAIN_APP: Removed ID=86[0m
+[0;32mI (513802) MAIN_APP: Removed ID=87[0m
+[0;32mI (573838) MAIN_APP: New Object ID=89[0m
+[0;32mI (573838) MAIN_APP: New Object ID=90[0m
+[0;32mI (574098) MAIN_APP: New Object ID=91[0m
+[0;32mI (574877) MAIN_APP: Removed ID=89[0m
+[0;32mI (575007) MAIN_APP: Removed ID=91[0m
+[0;32mI (575008) MAIN_APP: Removed ID=90[0m
+[0;32mI (579426) MAIN_APP: New Object ID=92[0m
+[0;32mI (580855) MAIN_APP: Removed ID=92[0m
+[0;32mI (635433) MAIN_APP: New Object ID=93[0m
+[0;32mI (674807) MAIN_APP: Removed ID=93[0m
+[0;32mI (740171) MAIN_APP: New Object ID=94[0m
+[0;32mI (740172) MAIN_APP: New Object ID=95[0m
+[0;32mI (740172) MAIN_APP: New Object ID=96[0m
+[0;32mI (741081) MAIN_APP: Removed ID=96[0m
+[0;32mI (741081) MAIN_APP: Removed ID=95[0m
+[0;32mI (741081) MAIN_APP: Removed ID=94[0m
+[0;32mI (741861) MAIN_APP: New Object ID=97[0m
+[0;32mI (743030) MAIN_APP: Removed ID=97[0m
+[0;32mI (743160) MAIN_APP: New Object ID=98[0m
+[0;32mI (744200) MAIN_APP: Removed ID=98[0m
+[0;32mI (747319) MAIN_APP: New Object ID=99[0m
+[0;32mI (748358) MAIN_APP: Removed ID=99[0m
+[0;32mI (773958) MAIN_APP: New Object ID=100[0m
+[0;32mI (773958) MAIN_APP: New Object ID=101[0m
+[0;32mI (774997) MAIN_APP: Removed ID=100[0m
+[0;32mI (813982) MAIN_APP: Removed ID=101[0m
+[0;32mI (853226) MAIN_APP: New Object ID=102[0m
+[0;32mI (853227) MAIN_APP: New Object ID=103[0m
+[0;32mI (853227) MAIN_APP: New Object ID=104[0m
+[0;32mI (854525) MAIN_APP: Removed ID=104[0m
+[0;32mI (854526) MAIN_APP: Removed ID=103[0m
+[0;32mI (854526) MAIN_APP: Removed ID=102[0m
+[0;32mI (854656) MAIN_APP: New Object ID=105[0m
+[0;32mI (854656) MAIN_APP: New Object ID=106[0m
+[0;32mI (854656) MAIN_APP: New Object ID=107[0m
+[0;32mI (854658) MAIN_APP: New Object ID=108[0m
+[0;32mI (855695) MAIN_APP: Removed ID=108[0m
+[0;32mI (855955) MAIN_APP: Removed ID=107[0m
+[0;32mI (855955) MAIN_APP: Removed ID=106[0m
+[0;32mI (855955) MAIN_APP: Removed ID=105[0m
+[0;32mI (869210) MAIN_APP: New Object ID=109[0m
+[0;32mI (870509) MAIN_APP: Removed ID=109[0m
+[0;32mI (870639) MAIN_APP: New Object ID=110[0m
+[0;32mI (871679) MAIN_APP: Removed ID=110[0m
+[0;32mI (918330) MAIN_APP: New Object ID=111[0m
+[0;32mI (918331) MAIN_APP: New Object ID=112[0m
+[0;32mI (918590) MAIN_APP: New Object ID=113[0m
+[0;32mI (919499) MAIN_APP: Removed ID=113[0m
+[0;32mI (919889) MAIN_APP: Removed ID=111[0m
+[0;32mI (920019) MAIN_APP: Removed ID=112[0m
+[0;32mI (925607) MAIN_APP: New Object ID=114[0m
+[0;32mI (926517) MAIN_APP: Removed ID=114[0m
+[0;32mI (931455) MAIN_APP: New Object ID=115[0m
+[0;32mI (931455) MAIN_APP: New Object ID=116[0m
+[0;32mI (932624) MAIN_APP: Removed ID=116[0m
+[0;32mI (932625) MAIN_APP: Removed ID=115[0m
+[0;32mI (940292) MAIN_APP: New Object ID=117[0m
+[0;32mI (940552) MAIN_APP: New Object ID=118[0m
+[0;32mI (940682) MAIN_APP: New Object ID=119[0m
+[0;32mI (940941) MAIN_APP: New Object ID=120[0m
+[0;32mI (940942) MAIN_APP: New Object ID=121[0m
+[0;32mI (941591) MAIN_APP: Removed ID=119[0m
+[0;32mI (941851) MAIN_APP: Removed ID=121[0m
+[0;32mI (941851) MAIN_APP: Removed ID=117[0m
+[0;32mI (941981) MAIN_APP: Removed ID=118[0m
+[0;32mI (942371) MAIN_APP: New Object ID=122[0m
+[0;32mI (943020) MAIN_APP: New Object ID=123[0m
+[0;32mI (945490) MAIN_APP: Removed ID=123[0m
+[0;32mI (945749) MAIN_APP: New Object ID=124[0m
+[0;32mI (946659) MAIN_APP: New Object ID=125[0m
+[0;32mI (946659) MAIN_APP: Removed ID=124[0m
+[0;32mI (946789) MAIN_APP: Removed ID=122[0m
+[0;32mI (947568) MAIN_APP: Removed ID=125[0m
+[0;32mI (947569) MAIN_APP: Removed ID=120[0m
+[0;32mI (948088) MAIN_APP: New Object ID=126[0m
+[0;32mI (948608) MAIN_APP: New Object ID=127[0m
+[0;32mI (949517) MAIN_APP: Removed ID=127[0m
+[0;32mI (949518) MAIN_APP: Removed ID=126[0m
+[0;32mI (950038) MAIN_APP: New Object ID=128[0m
+[0;32mI (950038) MAIN_APP: New Object ID=129[0m
+[0;32mI (950817) MAIN_APP: New Object ID=130[0m
+[0;32mI (951467) MAIN_APP: New Object ID=131[0m
+[0;32mI (951727) MAIN_APP: New Object ID=132[0m
+[0;32mI (952376) MAIN_APP: Removed ID=130[0m
+[0;32mI (952377) MAIN_APP: Removed ID=129[0m
+[0;32mI (952507) MAIN_APP: New Object ID=133[0m
+[0;32mI (952637) MAIN_APP: Removed ID=132[0m
+[0;32mI (952767) MAIN_APP: New Object ID=134[0m
+[0;32mI (952767) MAIN_APP: New Object ID=135[0m
+[0;32mI (953156) MAIN_APP: New Object ID=136[0m
+[0;32mI (953546) MAIN_APP: Removed ID=128[0m
+[0;32mI (953676) MAIN_APP: Removed ID=135[0m
+[0;32mI (953676) MAIN_APP: Removed ID=131[0m
+[0;32mI (954066) MAIN_APP: Removed ID=136[0m
+[0;32mI (954586) MAIN_APP: New Object ID=137[0m
+[0;32mI (954716) MAIN_APP: New Object ID=138[0m
+[0;32mI (955105) MAIN_APP: Removed ID=133[0m
+[0;32mI (955496) MAIN_APP: New Object ID=139[0m
+[0;32mI (955496) MAIN_APP: Removed ID=134[0m
+[0;32mI (955626) MAIN_APP: Removed ID=138[0m
+[0;32mI (955626) MAIN_APP: Removed ID=137[0m
+[0;32mI (956016) MAIN_APP: New Object ID=140[0m
+[0;32mI (958224) MAIN_APP: Removed ID=140[0m
+[0;32mI (958874) MAIN_APP: New Object ID=141[0m
+[0;32mI (959784) MAIN_APP: New Object ID=142[0m
+[0;32mI (959914) MAIN_APP: New Object ID=143[0m
+[0;32mI (960433) MAIN_APP: New Object ID=144[0m
+[0;32mI (960823) MAIN_APP: Removed ID=142[0m
+[0;32mI (961213) MAIN_APP: New Object ID=145[0m
+[0;32mI (961343) MAIN_APP: Removed ID=144[0m
+[0;32mI (961343) MAIN_APP: Removed ID=143[0m
+[0;32mI (962512) MAIN_APP: Removed ID=145[0m
+[0;32mI (962513) MAIN_APP: Removed ID=141[0m
+[0;32mI (962642) MAIN_APP: Removed ID=139[0m
+[0;32mI (965891) MAIN_APP: New Object ID=146[0m
+[0;32mI (965892) MAIN_APP: New Object ID=147[0m
+[0;32mI (965892) MAIN_APP: New Object ID=148[0m
+[0;32mI (966022) MAIN_APP: New Object ID=149[0m
+[0;32mI (966152) MAIN_APP: New Object ID=150[0m
+[0;32mI (966152) MAIN_APP: New Object ID=151[0m
+[0;32mI (966152) MAIN_APP: New Object ID=152[0m
+[0;32mI (966154) MAIN_APP: New Object ID=153[0m
+[0;32mI (966159) MAIN_APP: New Object ID=154[0m
+[0;32mI (966541) MAIN_APP: New Object ID=155[0m
+[0;32mI (967060) MAIN_APP: Removed ID=154[0m
+[0;32mI (967061) MAIN_APP: Removed ID=153[0m
+[0;32mI (967061) MAIN_APP: Removed ID=152[0m
+[0;32mI (967062) MAIN_APP: Removed ID=150[0m
+[0;32mI (967066) MAIN_APP: Removed ID=148[0m
+[0;32mI (967190) MAIN_APP: Removed ID=151[0m
+[0;32mI (967191) MAIN_APP: Removed ID=149[0m
+[0;32mI (967320) MAIN_APP: Removed ID=147[0m
+[0;32mI (967450) MAIN_APP: Removed ID=155[0m
+[0;32mI (967451) MAIN_APP: Removed ID=146[0m
+[0;32mI (1052502) MAIN_APP: New Object ID=156[0m
+[0;32mI (1053021) MAIN_APP: New Object ID=157[0m
+[0;32mI (1054061) MAIN_APP: Removed ID=157[0m
+[0;32mI (1055750) MAIN_APP: New Object ID=158[0m
+[0;32mI (1058999) MAIN_APP: Removed ID=158[0m
+[0;32mI (1060818) MAIN_APP: Removed ID=156[0m
+cam_hal: EV-VSYNC-OVF - 100 additional misses
+[0;32mI (1141646) MAIN_APP: New Object ID=159[0m
+[0;32mI (1141906) MAIN_APP: New Object ID=160[0m
+[0;32mI (1142815) MAIN_APP: Removed ID=159[0m
+[0;32mI (1143465) MAIN_APP: New Object ID=161[0m
+[0;32mI (1145284) MAIN_APP: Removed ID=161[0m
+[0;32mI (1145285) MAIN_APP: Removed ID=160[0m
+[0;32mI (1147753) MAIN_APP: New Object ID=162[0m
+[0;32mI (1149313) MAIN_APP: Removed ID=162[0m
+[0;32mI (1149443) MAIN_APP: New Object ID=163[0m
+[0;32mI (1149443) MAIN_APP: New Object ID=164[0m
+[0;32mI (1149443) MAIN_APP: New Object ID=165[0m
+[0;32mI (1150352) MAIN_APP: Removed ID=165[0m
+[0;32mI (1150352) MAIN_APP: Removed ID=164[0m
+[0;32mI (1150353) MAIN_APP: Removed ID=163[0m
+[0;32mI (1162567) MAIN_APP: New Object ID=166[0m
+[0;32mI (1162568) MAIN_APP: New Object ID=167[0m
+[0;32mI (1162827) MAIN_APP: New Object ID=168[0m
+[0;32mI (1163607) MAIN_APP: Removed ID=166[0m
+[0;32mI (1163867) MAIN_APP: Removed ID=168[0m
+[0;32mI (1163867) MAIN_APP: Removed ID=167[0m
+[0;32mI (1167895) MAIN_APP: New Object ID=169[0m
+[0;32mI (1168935) MAIN_APP: Removed ID=169[0m
+[0;32mI (1171404) MAIN_APP: New Object ID=170[0m
+[0;32mI (1172313) MAIN_APP: Removed ID=170[0m
+[0;32mI (1236898) MAIN_APP: New Object ID=171[0m
+[0;32mI (1237807) MAIN_APP: Removed ID=171[0m
+[0;32mI (1268085) MAIN_APP: New Object ID=172[0m
+[0;32mI (1268995) MAIN_APP: New Object ID=173[0m
+[0;32mI (1268995) MAIN_APP: New Object ID=174[0m
+[0;32mI (1270294) MAIN_APP: Removed ID=173[0m
+[0;32mI (1271204) MAIN_APP: Removed ID=174[0m
+[0;32mI (1271204) MAIN_APP: Removed ID=172[0m
+[0;32mI (1272503) MAIN_APP: New Object ID=175[0m
+[0;32mI (1272504) MAIN_APP: New Object ID=176[0m
+[0;32mI (1272504) MAIN_APP: New Object ID=177[0m
+[0;32mI (1273413) MAIN_APP: Removed ID=176[0m
+[0;32mI (1273543) MAIN_APP: Removed ID=177[0m
+[0;32mI (1273543) MAIN_APP: Removed ID=175[0m
+[0;32mI (1273673) MAIN_APP: New Object ID=178[0m
+[0;32mI (1274712) MAIN_APP: Removed ID=178[0m
+[0;32mI (1314217) MAIN_APP: New Object ID=179[0m
+[0;32mI (1314217) MAIN_APP: New Object ID=180[0m
+[0;32mI (1315256) MAIN_APP: Removed ID=180[0m
+[0;32mI (1315256) MAIN_APP: Removed ID=179[0m
+[0;32mI (1332669) MAIN_APP: New Object ID=181[0m
+[0;32mI (1372303) MAIN_APP: Removed ID=181[0m
+[0;32mI (1372953) MAIN_APP: New Object ID=182[0m
+[0;32mI (1372954) MAIN_APP: New Object ID=183[0m
+[0;32mI (1373863) MAIN_APP: Removed ID=183[0m
+[0;32mI (1374643) MAIN_APP: Removed ID=182[0m
+[0;32mI (1384908) MAIN_APP: New Object ID=184[0m
+[0;32mI (1386078) MAIN_APP: Removed ID=184[0m
+[0;32mI (1387638) MAIN_APP: New Object ID=185[0m
+[0;32mI (1390236) MAIN_APP: Removed ID=185[0m
+[0;32mI (1390366) MAIN_APP: New Object ID=186[0m
+[0;32mI (1392705) MAIN_APP: Removed ID=186[0m
+[0;32mI (1393225) MAIN_APP: New Object ID=187[0m
+[0;32mI (1395044) MAIN_APP: Removed ID=187[0m
+[0;32mI (1395694) MAIN_APP: New Object ID=188[0m
+[0;32mI (1396474) MAIN_APP: New Object ID=189[0m
+[0;32mI (1397903) MAIN_APP: New Object ID=190[0m
+[0;32mI (1398163) MAIN_APP: Removed ID=188[0m
+[0;32mI (1398293) MAIN_APP: Removed ID=189[0m
+[0;32mI (1430520) MAIN_APP: Removed ID=190[0m
+[0;32mI (1433249) MAIN_APP: New Object ID=191[0m
+[0;32mI (1434159) MAIN_APP: Removed ID=191[0m
+[0;32mI (1434419) MAIN_APP: New Object ID=192[0m
+[0;32mI (1434419) MAIN_APP: New Object ID=193[0m
+[0;32mI (1434549) MAIN_APP: New Object ID=194[0m
+[0;32mI (1435458) MAIN_APP: Removed ID=192[0m
+[0;32mI (1436108) MAIN_APP: Removed ID=194[0m
+[0;32mI (1437537) MAIN_APP: Removed ID=193[0m
+[0;32mI (1441696) MAIN_APP: New Object ID=195[0m
+[0;32mI (1443645) MAIN_APP: Removed ID=195[0m
+[0;32mI (1444425) MAIN_APP: New Object ID=196[0m
+[0;32mI (1444425) MAIN_APP: New Object ID=197[0m
+[0;32mI (1446114) MAIN_APP: Removed ID=197[0m
+[0;32mI (1446114) MAIN_APP: Removed ID=196[0m
+[0;32mI (1449623) MAIN_APP: New Object ID=198[0m
+[0;32mI (1450532) MAIN_APP: Removed ID=198[0m
+[0;32mI (1457420) MAIN_APP: New Object ID=199[0m
+[0;32mI (1457809) MAIN_APP: New Object ID=200[0m
+[0;32mI (1458719) MAIN_APP: Removed ID=200[0m
+[0;32mI (1458719) MAIN_APP: Removed ID=199[0m
+[0;32mI (1474183) MAIN_APP: New Object ID=201[0m
+[0;32mI (1474313) MAIN_APP: New Object ID=202[0m
+[0;32mI (1474313) MAIN_APP: New Object ID=203[0m
+[0;32mI (1475222) MAIN_APP: Removed ID=201[0m
+[0;32mI (1475352) MAIN_APP: Removed ID=202[0m
+[0;32mI (1514596) MAIN_APP: Removed ID=203[0m
+[0;32mI (1590096) MAIN_APP: New Object ID=204[0m
+[0;32mI (1591266) MAIN_APP: Removed ID=204[0m

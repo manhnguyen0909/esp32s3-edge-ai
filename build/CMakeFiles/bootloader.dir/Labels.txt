@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/CMakeFiles/bootloader
+C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/CMakeFiles/bootloader.rule
+C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/CMakeFiles/bootloader-complete.rule
+C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule

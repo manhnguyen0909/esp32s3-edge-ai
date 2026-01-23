@@ -1,0 +1,24 @@
+-- IDF_TARGET is not set, guessed 'esp32s3' from sdkconfig 'C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/sdkconfig'
+-- Found Git: C:/Espressif/tools/idf-git/2.44.0/cmd/git.exe (found version "2.44.0.windows.1")
+-- Component directory C:/Espressif/frameworks/esp-idf-v5.2.6/components/esp_vfs_console does not contain a CMakeLists.txt file. No component will be added
+-- ccache will be used for faster recompilation
+-- The C compiler identification is GNU 13.2.0
+-- The CXX compiler identification is GNU 13.2.0
+-- The ASM compiler identification is GNU
+-- Found assembler: C:/Espressif/tools/xtensa-esp-elf/esp-13.2.0_20250707/xtensa-esp-elf/bin/xtensa-esp32s3-elf-gcc.exe
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: C:/Espressif/tools/xtensa-esp-elf/esp-13.2.0_20250707/xtensa-esp-elf/bin/xtensa-esp32s3-elf-gcc.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/Espressif/tools/xtensa-esp-elf/esp-13.2.0_20250707/xtensa-esp-elf/bin/xtensa-esp32s3-elf-g++.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Building ESP-IDF components for target esp32s3
+NOTICE: Processing 3 dependencies:
+NOTICE: [1/3] espressif/esp32-camera (2.1.4)
+NOTICE: [2/3] espressif/esp_jpeg (1.3.1)
+NOTICE: [3/3] idf (5.2.6)
+-- Configuring incomplete, errors occurred!

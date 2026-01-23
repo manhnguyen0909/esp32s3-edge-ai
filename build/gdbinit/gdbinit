@@ -1,0 +1,2 @@
+source C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/gdbinit/symbols
+source C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/gdbinit/connect
