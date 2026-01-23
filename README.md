@@ -47,8 +47,9 @@ Dự án tuân theo kiến trúc hướng Component của ESP-IDF:
 ├── main/
 │   └── main.c                # Logic chính: Thuật toán Motion, Tracking & Scheduler
 ├── CMakeLists.txt            # Cấu hình Build hệ thống
-└── README.md                 # Tài liệu dự án
-# ⚙️ Cấu Hình & Tinh Chỉnh
+└── README.md                 # Tài liệu dự 
+```
+## ⚙️ Cấu Hình & Tinh Chỉnh
 
 ## 1. Cấu hình WiFi (Khuyên dùng)
 Không cần sửa code. Sử dụng công cụ cấu hình của IDF:
@@ -73,31 +74,35 @@ Không cần sửa code. Sử dụng công cụ cấu hình của IDF:
 ## Bước 1: Chuẩn bị môi trường
 - Cài đặt ESP-IDF v5.0 trở lên.
 - VS Code với Extension Espressif IDF.
-
 ## Bước 2: Build & Nạp Code
-```bash
 ### 1. Thiết lập target là chip ESP32-S3
+```bash
 idf.py set-target esp32s3
-
+```
 ### 2. Cấu hình WiFi (Quan trọng)
+```bash
 idf.py menuconfig
-
+```
 ### 3. Biên dịch dự án
+```bash
 idf.py build
-
+```
 ### 4. Nạp code và mở Monitor (Thay COMx bằng cổng của bạn)
+```bash
 idf.py -p COMx flash monitor
-#📡 Tài Liệu API
+```
+
+# 📡Tài Liệu API
 Sau khi khởi động thành công, địa chỉ IP của thiết bị sẽ hiện trên Terminal (ví dụ: 192.168.1.105).
 
-##1. Video Stream (MJPEG)
+## 1. Video Stream (MJPEG)
 URL: http://<IP_ADDRESS>/
 
 Phương thức: GET
 
 Mô tả: Luồng video trực tiếp có vẽ sẵn bounding box và ID đối tượng.
 
-##2. Metadata Đối Tượng (JSON)
+## 2. Metadata Đối Tượng (JSON)
 URL: http://<IP_ADDRESS>/metadata
 
 Phương thức: GET
@@ -124,18 +129,17 @@ json
     }
   ]
 }
-#⚠️ Khắc Phục Sự Cố (Troubleshooting)
-##Video bị Lag/Giật:
-Kiểm tra ăng-ten WiFi.
+# ⚠️ Khắc Phục Sự Cố (Troubleshooting)
+## Video bị Lag/Giật:
+* Kiểm tra ăng-ten WiFi
+* Đảm bảo wifi_manager đã tắt chế độ tiết kiệm điện (esp_wifi_set_ps(WIFI_PS_NONE)).
+* Giảm chất lượng ảnh trong esp32_camera_driver.c (jpeg_quality tăng lên 50-60).
+## Lỗi Camera Init Failed:
+* Kiểm tra dây cáp camera.
+* Kiểm tra lại định nghĩa chân (Pinout) trong components/esp32_camera_driver/esp32_camera_driver.c xem có khớp với bo mạch của bạn không (Freenove vs AI-Thinker).
 
-Đảm bảo wifi_manager đã tắt chế độ tiết kiệm điện (esp_wifi_set_ps(WIFI_PS_NONE)).
-
-Giảm chất lượng ảnh trong esp32_camera_driver.c (jpeg_quality tăng lên 50-60).
-
-##Lỗi Camera Init Failed:
-Kiểm tra dây cáp camera.
-
-##Kiểm tra lại định nghĩa chân (Pinout) trong components/esp32_camera_driver/esp32_camera_driver.c xem có khớp với bo mạch của bạn không (Freenove vs AI-Thinker).
-
-##Tràn bộ nhớ (Out of Memory):
+## Tràn bộ nhớ (Out of Memory):
 Đảm bảo chip là ESP32-S3 có PSRAM và đã bật PSRAM trong idf.py menuconfig > Component config > ESP32S3-specific.
+# 🤝 Đóng Góp
+Mọi đóng góp (Pull Request, Issue) đều được hoan nghênh. Xin vui lòng tuân thủ quy chuẩn coding style của dự án.
+# Developed by _Manh Nguyen_
