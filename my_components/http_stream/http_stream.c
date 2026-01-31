@@ -84,12 +84,12 @@ void start_http_server(QueueHandle_t frame_q, SemaphoreHandle_t mutex, object_da
     config.core_id = 0;
 
     httpd_handle_t stream_httpd = NULL;
-    httpd_uri_t stream_uri = { .uri = "/", .method = HTTP_GET, .handler = stream_handler };
+    httpd_uri_t stream_uri = { .uri = "/stream", .method = HTTP_GET, .handler = stream_handler };
     httpd_uri_t meta_uri = { .uri = "/metadata", .method = HTTP_GET, .handler = metadata_handler };
 
     if (httpd_start(&stream_httpd, &config) == ESP_OK) {
         httpd_register_uri_handler(stream_httpd, &stream_uri);
         httpd_register_uri_handler(stream_httpd, &meta_uri);
-        ESP_LOGI(TAG, "HTTP Server Started at port 80");
+        ESP_LOGI(TAG, "HTTP Server started on port %d", config.server_port);
     }
 }

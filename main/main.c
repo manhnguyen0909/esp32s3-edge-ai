@@ -10,6 +10,8 @@
 #include "esp_timer.h"
 #include "esp_heap_caps.h"
 #include "nvs_flash.h"
+#include "ota_server.h"
+#include "oled_ssd1306.h"
 
 // --- INCLUDE COMPONENTS ---
 #include "wifi_manager.h"
@@ -20,15 +22,16 @@ static const char *TAG = "MAIN_APP";
 
 // ================= CONFIG THUẬT TOÁN MOTION =================
 #define BLOCK_SIZE       8
-#define MOTION_THRESHOLD 30
-#define ALERT_THRESHOLD  20
-#define CONSECUTIVE_FRAMES 2
+#define MOTION_THRESHOLD 15
+#define ALERT_THRESHOLD  10
+#define CONSECUTIVE_FRAMES 4
 #define MIN_OBJECT_SIZE  200
+#define MAX_OBJECT_SIZE  40000
 #define REGION_MERGE_THRESHOLD 3
 #define OBJECT_TIMEOUT   6
-#define STATIONARY_TIMEOUT 300
-#define STATIONARY_THRESHOLD 3
-#define DISTANCE_THRESHOLD 90
+#define STATIONARY_TIMEOUT 200
+#define STATIONARY_THRESHOLD 10
+#define DISTANCE_THRESHOLD 70
 
 // ================= GLOBAL RESOURCES =================
 static QueueHandle_t frame_queue = NULL;
@@ -209,7 +212,8 @@ static void match_and_update_objects(motion_result_t *motion_result) {
         int region_height = region->max_y - region->min_y + 1;
         
         // Lọc nhiễu kích thước
-        if ((region_width * region_height * BLOCK_SIZE * BLOCK_SIZE) < MIN_OBJECT_SIZE) continue;
+        int region_area = region_width * region_height * BLOCK_SIZE * BLOCK_SIZE;
+        if (region_area < MIN_OBJECT_SIZE || region_area > MAX_OBJECT_SIZE) continue;
         
         int center_x = (region->min_x + region->max_x) * BLOCK_SIZE / 2;
         int center_y = (region->min_y + region->max_y) * BLOCK_SIZE / 2;
@@ -330,7 +334,7 @@ static void compute_motion(camera_fb_t *fb, motion_result_t *result) {
 
 // ================= MAIN TASKS =================
 static void motion_detection_task(void *pvParameters) {
-    ESP_LOGI(TAG, "Motion Task Started (No OLED)");
+    ESP_LOGI(TAG, "Motion Task Started");
     motion_result_t current_motion = {0};
     int local_frame_counter = 0;
 
@@ -339,11 +343,43 @@ static void motion_detection_task(void *pvParameters) {
         if (!fb) { vTaskDelay(pdMS_TO_TICKS(10)); continue; }
 
         local_frame_counter++;
-        
+        if (local_frame_counter > 1000) {
+            local_frame_counter = 0;
+        }
         // 1. Tính toán Motion (Mỗi 2 frame làm 1 lần để giảm tải)
-        if (local_frame_counter % 2 == 0) {
+        if (local_frame_counter % 4 == 0) {
             compute_motion(fb, &current_motion);
             match_and_update_objects(&current_motion);
+            // [LOG REAL-TIME] In ngay sau khi tính toán xong
+            // -------------------------------------------------------------
+            // Chỉ in khi có đối tượng trong danh sách để đỡ spam
+            if (obj_db.count > 0) {
+                int active_count = 0;
+                
+                // Dùng printf để in trên 1 dòng cho gọn, đỡ bị trôi màn hình
+                // Format: [ID:DiệnTích] [ID:DiệnTích] ...
+                printf("Frame %d | Objects: ", local_frame_counter);
+
+                for (int i = 0; i < obj_db.count; i++) {
+                    if (obj_db.objects[i].active && obj_db.objects[i].lost_frames < 2) {
+                        active_count++;
+                        
+                        int w = obj_db.objects[i].max_x - obj_db.objects[i].min_x + 1;
+                        int h = obj_db.objects[i].max_y - obj_db.objects[i].min_y + 1;
+                        int area = w * h;
+
+                        // In gọn: ID và Diện tích
+                        printf("[ID:%d Area:%d] ", obj_db.objects[i].id, area);
+                    }
+                }
+                
+                if (active_count > 0) {
+                    printf("\n"); // Xuống dòng để kết thúc log frame này
+                } else {
+                    // Nếu có trong DB nhưng đang bị lost (không active) thì in dòng trống hoặc bỏ qua
+                    printf("(Lost)\r"); 
+                }
+            }
         }
         
         // 2. Vẽ khung lên FrameBuffer (Để stream về web thấy được)
@@ -387,19 +423,61 @@ static void motion_detection_task(void *pvParameters) {
     }
 }
 
+//hàm oled task
+static void oled_display_task(void *pvParameters) {
+    ESP_LOGI(TAG, "OLED Display Task Started");
+    vTaskDelay(pdMS_TO_TICKS(1000)); // Chờ 1 giây trước khi bắt đầu
+    while (1) {
+        //lấy mutex từ motion_mutex
+        if (xSemaphoreTake(motion_mutex, portMAX_DELAY) == pdTRUE) {
+            oled_clear();
+            oled_draw_string(3, 0, "Motion Monitor:");
+            char line[32];
+            // Dòng 2: Số lượng
+            snprintf(line, sizeof(line), "Count: %d", obj_db.count);
+            oled_draw_string(3, 10, line);
+            
+            // Dòng 3-5: Liệt kê object
+            for (int i = 0; i < obj_db.count && i < 3; i++) {
+                int w = obj_db.objects[i].max_x - obj_db.objects[i].min_x + 1;
+                int h = obj_db.objects[i].max_y - obj_db.objects[i].min_y + 1;
+                int area = w * h;
+                
+                char status = obj_db.objects[i].stationary ? 'S' : 'M';
+                // Format ngắn gọn: ID[S]:Size
+                snprintf(line, sizeof(line), "#%d[%c]:%d", 
+                         obj_db.objects[i].id, status, area);
+                oled_draw_string(3, 20 + (i * 10), line);
+            }
+            oled_update();
+            xSemaphoreGive(motion_mutex);
+        }      
+        vTaskDelay(pdMS_TO_TICKS(500));
+    }
+}
+
 // ================= APP MAIN =================
 void app_main(void) {
+    oled_init_driver(); // Khởi động OLED Driver
+    oled_draw_string(3, 0, "ESP32-S3 Cam");
     // 1. NVS Init
     esp_err_t ret = nvs_flash_init();
     if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
         ESP_ERROR_CHECK(nvs_flash_erase());
         ret = nvs_flash_init();
     }
-    
+    oled_draw_string(3, 10, "NVS Initialized");
+    oled_update();
     // 2. Init các Component
-    if (camera_driver_init() != ESP_OK) return;
-    wifi_manager_init();
+    if (camera_driver_init() != ESP_OK) return; // Khởi động Camera
+    wifi_manager_init(); // Kết nối WiFi
+    oled_draw_string(3, 20, "WiFi Connected");
+    oled_update();
 
+    start_ota_server(); // Khởi động OTA Server
+    oled_draw_string(3, 30, "OTA Server Started");
+    oled_update();
+    
     // 3. Tạo tài nguyên chia sẻ
     frame_queue = xQueueCreate(4, sizeof(jpeg_frame_t *));
     motion_mutex = xSemaphoreCreateMutex();
@@ -409,6 +487,7 @@ void app_main(void) {
 
     // 5. Start HTTP Server
     start_http_server(frame_queue, motion_mutex, &obj_db);
+    xTaskCreate(oled_display_task, "oled_task", 4096, NULL, 1, NULL);
     
-    ESP_LOGI(TAG, "System Started - OLED Removed");
+    ESP_LOGI(TAG, "System Started:");
 }

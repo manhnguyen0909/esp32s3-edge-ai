@@ -2,3 +2,4 @@
 0x0 bootloader/bootloader.bin
 0x20000 cadpro_motion_detection_esp32s3_cam_project.bin
 0x10000 partition_table/partition-table.bin
+0x15000 ota_data_initial.bin

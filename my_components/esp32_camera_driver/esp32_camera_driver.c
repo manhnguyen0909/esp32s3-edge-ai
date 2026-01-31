@@ -47,7 +47,7 @@ esp_err_t camera_driver_init(void) {
         .pixel_format = PIXFORMAT_GRAYSCALE,// Dùng ảnh xám xử lý cho nhanh
         .frame_size = FRAMESIZE_QVGA,       // 320x240
         .jpeg_quality = 50,                 // Chất lượng vừa phải
-        .fb_count = 4,                      // Buffer lớn tránh giật
+        .fb_count = 2,                      // Buffer lớn tránh giật
         .fb_location = CAMERA_FB_IN_PSRAM,
         .grab_mode = CAMERA_GRAB_LATEST
     };

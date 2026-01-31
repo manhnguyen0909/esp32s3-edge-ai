@@ -6,6 +6,7 @@
 #include "esp_event.h"
 #include "esp_log.h"
 #include "esp_netif.h"
+#include "oled_ssd1306.h"
 
 // --- KHÔNG CẦN DEFINE CỨNG NỮA ---
 // #define WIFI_SSID      "TPLINK24G"  <-- Xóa dòng này
@@ -38,7 +39,6 @@ void wifi_manager_init(void) {
     esp_wifi_connect();
 
     ESP_LOGI(TAG, "Connecting to WiFi SSID: %s", CONFIG_WIFI_SSID);
-    
     int retry = 0;
     // Sử dụng biến cấu hình số lần thử lại từ Menuconfig luôn
     while (retry < CONFIG_WIFI_MAX_RETRY) {
@@ -48,6 +48,7 @@ void wifi_manager_init(void) {
             esp_netif_get_ip_info(netif, &ip_info);
             if (ip_info.ip.addr != 0) {
                 ESP_LOGI(TAG, "Got IP: " IPSTR, IP2STR(&ip_info.ip));
+                ESP_LOGI(TAG, "WEB STREAMING URL: http://" IPSTR ":80/stream",IP2STR(&ip_info.ip));
                 return;
             }
         }

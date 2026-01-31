@@ -419,6 +419,11 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
+  include("C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/oled_driver/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
   include("C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/wifi_manager/cmake_install.cmake")
 endif()
 
@@ -440,6 +445,11 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
   include("C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/esp32_camera_driver/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/ota_server/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)

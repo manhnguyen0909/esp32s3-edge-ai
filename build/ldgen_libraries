@@ -64,9 +64,11 @@ C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/s
 C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/touch_element/libtouch_element.a
 C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/usb/libusb.a
 C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/wifi_provisioning/libwifi_provisioning.a
+C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/oled_driver/liboled_driver.a
 C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/wifi_manager/libwifi_manager.a
 C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/http_stream/libhttp_stream.a
 C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/espressif__esp_jpeg/libespressif__esp_jpeg.a
 C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/espressif__esp32-camera/libespressif__esp32-camera.a
 C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/esp32_camera_driver/libesp32_camera_driver.a
+C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/ota_server/libota_server.a
 C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/main/libmain.a

@@ -8,4 +8,5 @@ idf_component_register(
         freertos
         log
         esp_event
+        oled_driver
 )
