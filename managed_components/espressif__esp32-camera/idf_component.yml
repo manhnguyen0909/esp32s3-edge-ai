@@ -9,7 +9,7 @@ documentation: https://github.com/espressif/esp32-camera/tree/main/README.md
 issues: https://github.com/espressif/esp32-camera/issues
 repository: git://github.com/espressif/esp32-camera.git
 repository_info:
-  commit_sha: b817e9b81041980608d1a3d3e0b08d86e3666382
+  commit_sha: 1d73d881bcecdd4149e7192b7fcf0dbd928169fd
   path: .
 url: https://github.com/espressif/esp32-camera
-version: 2.1.4
+version: 2.1.5

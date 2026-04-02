@@ -27,6 +27,7 @@ typedef struct {
     int active;     // Dùng int thay bool cho chuẩn
     int stationary;
     int stationary_frames;
+    bool is_person; // Thêm cờ nhận diện người từ AI
 } tracked_object_t;
 
 typedef struct {

@@ -1,5 +1,5 @@
 #include "ota_server.h"
-#include <stdlib.h> // [FIX] Thêm thư viện này để dùng malloc/free
+#include <stdlib.h> // Dùng malloc/free
 #include <string.h>
 #include "esp_http_server.h"
 #include "esp_ota_ops.h"
@@ -8,6 +8,7 @@
 #include "sys/param.h"
 #include "esp_timer.h"
 #include "esp_netif.h"  
+
 static const char *TAG = "OTA_SERVER";
 
 // HTML + JavaScript: Gửi file dạng Raw Binary (XHR)
@@ -95,22 +96,35 @@ static esp_err_t ota_update_handler(httpd_req_t *req) {
     buf = (char *)malloc(buf_size);
     if (!buf) {
         ESP_LOGE(TAG, "Failed to allocate buffer");
-        // [FIX] Thay hàm custom bằng hàm chuẩn
         httpd_resp_set_status(req, "500 Internal Server Error");
         httpd_resp_send(req, "OOM", HTTPD_RESP_USE_STRLEN);
         return ESP_FAIL;
     }
 
-    // 2. Tìm phân vùng tiếp theo
+    // 2. Kiểm tra phân vùng hiện hành và tìm phân vùng tiếp theo
+    const esp_partition_t *running = esp_ota_get_running_partition();
+    ESP_LOGI(TAG, "Running partition: %s", running ? running->label : "null");
+
     update_partition = esp_ota_get_next_update_partition(NULL);
-    if (update_partition == NULL) {
-        ESP_LOGE(TAG, "Passive partition not found");
-        free(buf);
-        // [FIX] Thay hàm custom bằng hàm chuẩn
+    if (!update_partition) {
+        ESP_LOGW(TAG, "esp_ota_get_next_update_partition returned NULL, thử fallback");
+        if (running && running->subtype == ESP_PARTITION_SUBTYPE_APP_OTA_0) {
+            update_partition = esp_partition_find_first(ESP_PARTITION_TYPE_APP, ESP_PARTITION_SUBTYPE_APP_OTA_1, NULL);
+        } else {
+            update_partition = esp_partition_find_first(ESP_PARTITION_TYPE_APP, ESP_PARTITION_SUBTYPE_APP_OTA_0, NULL);
+        }
+    }
+
+    if (!update_partition) {
+        ESP_LOGE(TAG, "Passive partition still not found; check partition table");
         httpd_resp_set_status(req, "500 Internal Server Error");
         httpd_resp_send(req, "Partition Error", HTTPD_RESP_USE_STRLEN);
+        free(buf);
         return ESP_FAIL;
     }
+
+    const esp_partition_t *boot = esp_ota_get_boot_partition();
+    ESP_LOGI(TAG, "Boot partition %s", boot ? boot->label : "null");
 
     // 3. Bắt đầu OTA
     err = esp_ota_begin(update_partition, OTA_SIZE_UNKNOWN, &update_handle);
@@ -158,7 +172,6 @@ static esp_err_t ota_update_handler(httpd_req_t *req) {
         } else {
             ESP_LOGE(TAG, "esp_ota_end failed (%s)!", esp_err_to_name(err));
         }
-        // [FIX] Thay hàm custom bằng hàm chuẩn
         httpd_resp_set_status(req, "500 Internal Server Error");
         httpd_resp_send(req, "OTA Validation Failed", HTTPD_RESP_USE_STRLEN);
         return ESP_FAIL;
@@ -175,8 +188,10 @@ static esp_err_t ota_update_handler(httpd_req_t *req) {
 
     ESP_LOGI(TAG, "OTA Success! Rebooting...");
     httpd_resp_sendstr(req, "OTA Success! Rebooting...");
+    
     // Thêm dòng này để xả hết buffer log ra trước khi chết
     fflush(stdout);
+    
     // 7. Reset sau 1 giây
     vTaskDelay(pdMS_TO_TICKS(1000));
     esp_restart();
@@ -187,8 +202,8 @@ static esp_err_t ota_update_handler(httpd_req_t *req) {
 void start_ota_server(void) {
     httpd_config_t config = HTTPD_DEFAULT_CONFIG();
     config.server_port = 81; 
-    // --- THÊM DÒNG NÀY ĐỂ FIX LỖI 112 ---
-    config.ctrl_port = 32769; // Đổi cổng điều khiển sang số khác 80 (mặc định)
+    // --- Đổi cổng điều khiển sang số khác 80 (mặc định) ---
+    config.ctrl_port = 32769; 
     config.stack_size = 8192;
     config.lru_purge_enable = true; 
 
@@ -213,6 +228,7 @@ void start_ota_server(void) {
         
         ESP_LOGI(TAG, "OTA Server started at port 81");
     }
+    
     // --- ĐOẠN CODE MỚI: LẤY IP VÀ IN LINK ---
     esp_netif_t *netif = esp_netif_get_handle_from_ifkey("WIFI_STA_DEF");
     esp_netif_ip_info_t ip_info;
@@ -227,5 +243,4 @@ void start_ota_server(void) {
     } else {
         ESP_LOGW(TAG, "OTA Server started on port 81 (Wait for WiFi IP...)");
     }
-    // ----------------------------------------
 }

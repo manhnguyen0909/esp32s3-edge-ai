@@ -66,9 +66,11 @@ $<TARGET_FILE:__idf_usb>
 $<TARGET_FILE:__idf_wifi_provisioning>
 $<TARGET_FILE:__idf_oled_driver>
 $<TARGET_FILE:__idf_wifi_manager>
-$<TARGET_FILE:__idf_http_stream>
 $<TARGET_FILE:__idf_espressif__esp_jpeg>
 $<TARGET_FILE:__idf_espressif__esp32-camera>
 $<TARGET_FILE:__idf_esp32_camera_driver>
+$<TARGET_FILE:__idf_http_stream>
 $<TARGET_FILE:__idf_ota_server>
+$<TARGET_FILE:__idf_espressif__esp-nn>
+$<TARGET_FILE:__idf_espressif__esp-tflite-micro>
 $<TARGET_FILE:__idf_main>

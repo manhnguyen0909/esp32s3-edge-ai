@@ -9,4 +9,5 @@ idf_component_register(
         log
         esp_event
         oled_driver
+        lwip
 )

@@ -429,11 +429,6 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/http_stream/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
   include("C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/espressif__esp_jpeg/cmake_install.cmake")
 endif()
 
@@ -449,7 +444,22 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
+  include("C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/http_stream/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
   include("C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/ota_server/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/espressif__esp-nn/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/espressif__esp-tflite-micro/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
