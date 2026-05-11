@@ -4,27 +4,39 @@
 ![Hardware](https://img.shields.io/badge/ESP32--S3-PSRAM-red)
 ![License](https://img.shields.io/badge/License-MIT-green)
 ---
-Hệ thống giám sát thông minh trên nền tảng **ESP32**, ứng dụng **thị giác máy tính (Computer Vision)** để phát hiện chuyển động, theo dõi và quản lý đối tượng theo thời gian thực.  
-Dự án hướng tới các ứng dụng **giám sát thông minh và IoT Edge Computing** với khả năng **stream video, hiển thị trực tiếp và cập nhật firmware từ xa (OTA)**.
+Hệ thống giám sát thông minh dựa trên **ESP32-S3-CAM**, kết hợp **phát hiện chuyển động**, **theo dõi đối tượng**, **phát hiện người bằng AI**, **stream video MJPEG** và **OTA firmware**.
+
+Dự án phù hợp cho các ứng dụng **giám sát tại biên (IoT Edge)**, cho phép thu thập hình ảnh, phân tích chuyển động/đối tượng trên thiết bị, đồng thời vẫn hỗ trợ **nâng cấp firmware từ xa**.
 
 ---
 
-## 🚀 Tính năng nổi bật
+## 🚀 Tính năng chính
 
-- **Phát hiện chuyển động (Motion Detection)**  
-  Sử dụng thuật toán *Frame Differencing* để phát hiện sự thay đổi giữa các khung hình theo thời gian thực.
+- **Phát hiện chuyển động (Motion Detection)**
+  - Dùng phương pháp *Frame Differencing* để tìm vùng thay đổi giữa các khung hình.
+  - Kết hợp **Flood Fill** để gom nhóm vùng di chuyển thành đối tượng.
 
-- **Theo dõi đối tượng (Object Tracking)**  
-  Tự động gán **Tracking ID** (`#1`, `#2`, …) và theo dõi **tọa độ trung tâm (Centroid)** của từng vật thể.
+- **Theo dõi đối tượng (Object Tracking)**
+  - Gán ID cho từng đối tượng và theo dõi vị trí trung tâm (centroid).
+  - Hỗ trợ giữ ID khi đối tượng di chuyển liên tục.
 
-- **Hiển thị trực tiếp trên OLED**  
-  Theo dõi số lượng, ID, trạng thái và kích thước vật thể (pixel) ngay trên thiết bị.
+- **Phát hiện người bằng AI**
+  - Khởi tạo mô-đun AI trong `main.cpp`.
+  - Hàm `ai_run(...)` trả về `1` nếu phát hiện người, `0` nếu không.
 
-- **Cập nhật OTA (Over-The-Air)**  
-  Nạp firmware mới trực tiếp qua **Web Browser**, không cần kết nối USB.
+- **MJPEG Streaming qua HTTP**
+  - Web server stream ảnh camera theo thời gian thực.
+  - Khởi tạo bằng `start_http_server(frame_queue, motion_mutex, &obj_db)`.
 
-- **MJPEG Streaming qua WiFi**  
-  Xem video camera theo thời gian thực thông qua trình duyệt web.
+- **OTA firmware cập nhật trực tiếp**
+  - Khởi động OTA server trên cổng `81`.
+  - Cập nhật firmware qua trình duyệt web mà không cần cắm USB.
+
+- **OLED SSD1306 hiển thị trạng thái**
+  - Hiển thị trạng thái khởi động, WiFi, OTA và thông tin giám sát.
+
+- **WiFi STA với quản lý kết nối**
+  - Dùng component `wifi_manager` để kết nối mạng và tự reconnect khi mất mạng.
 
 ---
 
@@ -36,115 +48,108 @@ Dự án hướng tới các ứng dụng **giám sát thông minh và IoT Edge 
 - Màn hình **OLED SSD1306 (I2C)**
 
 ### Phần mềm
-- Ngôn ngữ: **C**
-- Framework: **ESP-IDF**
+- Ngôn ngữ: **C / C++**
+- Framework: **ESP-IDF v5.x**
 - RTOS: **FreeRTOS**
-- Giao thức:  
-  - **HTTP Server** (Streaming & OTA)  
-  - **I2C** (OLED)
+- Thư viện JPEG: **espressif__esp_jpeg**
+- Driver camera: **espressif__esp32-camera**
 
-### Thuật toán
-- **Frame Differencing** – phát hiện chuyển động
-- **Flood Fill Algorithm** – gom nhóm điểm ảnh (Blob Detection)
-- **Centroid Tracking** – theo dõi vị trí đối tượng
+### Giao tiếp và dịch vụ
+- **HTTP Server** cho MJPEG streaming và OTA
+- **I2C** cho OLED
+- **WiFi STA** cho kết nối mạng
 
 ---
 
-## 📦 Cấu trúc thư mục
+## 📁 Cấu trúc thư mục
 
 ```text
-cadpro_motion_detection_esp32s3_cam/
-├── build/                       # Thư mục build (tự sinh bởi ESP-IDF)
-│
-├── main/                        # Ứng dụng chính
-│   ├── main.c                   # Entry point & logic điều phối hệ thống
-│   └── CMakeLists.txt
-│
-├── managed_components/          # Component được quản lý tự động (ESP-IDF)
-│   ├── espressif__esp_jpeg       # Thư viện xử lý JPEG
-│   └── espressif__esp32-camera   # Driver camera chính thức của Espressif
-│
-├── my_components/               # Các component tự phát triển
-│   ├── esp32_camera_driver/     # Wrapper / mở rộng driver camera
-│   ├── http_stream/             # MJPEG Streaming qua HTTP
-│   ├── oled_driver/             # Driver OLED SSD1306 (I2C)
+cadpro_motion_detection_esp32s3_cam_project/
+├── build/                       # Thư mục build được sinh bởi ESP-IDF
+├── main/                        # Mã nguồn chính và logic ứng dụng
+│   ├── main.cpp                 # Entry point và điều phối các component
+│   ├── image_utils.c/.h         # Xử lý ảnh và phân tích chuyển động
+│   ├── JPEGDEC.*                # Giải mã JPEG
+│   ├── person_ai/               # Mô-đun AI phát hiện người
+│   └── idf_component.yml
+├── managed_components/          # Component ESP-IDF tự động quản lý
+├── my_components/               # Component tự phát triển
+│   ├── esp32_camera_driver/     # Khởi tạo camera và cấu hình
+│   ├── http_stream/             # HTTP MJPEG streaming
+│   ├── oled_driver/             # Điều khiển màn hình OLED SSD1306
 │   ├── ota_server/              # OTA Web Server
-│   └── wifi_manager/            # Quản lý WiFi (STA, reconnect, event)
-│
-├── partitions.csv               # Bảng phân vùng (OTA, NVS, App)
+│   └── wifi_manager/            # Quản lý kết nối WiFi STA
+├── partitions.csv               # Bảng phân vùng OTA/NVS/App
 ├── sdkconfig                    # Cấu hình build hiện tại
 ├── sdkconfig.defaults           # Cấu hình mặc định
 ├── sdkconfig.old                # Backup cấu hình cũ
-│
-├── dependencies.lock            # Lock version component (ESP-IDF)
+├── dependencies.lock            # Lock version component ESP-IDF
 ├── CMakeLists.txt               # CMakeLists cấp project
 ├── .gitignore
-└── README.md                    # Tài liệu mô tả dự án
+└── README.md                    # Tài liệu dự án
 ```
-
-## ⚙️ Cấu hình & tinh chỉnh thuật toán
-Các tham số quan trọng nằm trong file "main.c".
-Cần tinh chỉnh tùy theo môi trường thực tế:
-| Tham Số | Giá trị (Default) | Ý nghĩa & Hướng dẫn Tinh chỉnh |
-| :--- | :---: | :--- |
-| **`BLOCK_SIZE`** | `8` | **Độ phân giải lưới (Grid Size).**<br>Kích thước ô vuông (pixel) dùng để quét ảnh.<br>🔼 **Tăng lên (16):** Xử lý nhanh hơn, giảm tải CPU.<br>🔽 **Giảm xuống (4):** Tăng độ chính xác cho đối tượng nhỏ (tốn RAM). |
-| **`MOTION_THRESHOLD`** | `5` | **Độ nhạy sáng (Sensitivity).**<br>Ngưỡng chênh lệch màu sắc tối thiểu để tính là chuyển động.<br>🔼 **Tăng lên (10-20):** Nếu camera bị nhiễu hạt (noise) hoặc báo động giả.<br>🔽 **Giảm xuống (2-3):** Để bắt chuyển động rất nhẹ (nhưng dễ nhiễu). |
-| **`ALERT_THRESHOLD`** | `10` | **Ngưỡng diện tích kích hoạt.**<br>Cần ít nhất 10 ô (blocks) thay đổi thì mới xác nhận có đối tượng.<br>🔼 **Tăng lên:** Để lọc bỏ lá cây rung, mưa rơi.<br>🔽 **Giảm xuống:** Để bắt đối tượng kích thước nhỏ. |
-| **`CONSECUTIVE_FRAMES`** | `2` | **Bộ lọc nhiễu nhất thời.**<br>Số khung hình liên tiếp phải có chuyển động thì mới kích hoạt.<br>👉 Giúp loại bỏ hiện tượng nháy đèn flash hoặc nhiễu điện (glitch). |
-| **`MIN_OBJECT_SIZE`** | `200` | **Lọc kích thước tối thiểu (pixel).**<br>Đối tượng có diện tích < 200px sẽ bị bỏ qua.<br>👉 Tăng lên nếu muốn bỏ qua vật nhỏ, chỉ bắt đối tượng lớn. |
-| **`MAX_OBJECT_SIZE`** | `40000` | **Lọc kích thước tối đa (pixel).**<br>Đối tượng quá lớn (do rung lắc camera khiến cả khung hình bị lệch) sẽ bị bỏ qua. |
-| **`REGION_MERGE_THRESHOLD`** | `3` | **Khoảng cách gộp (Merge Distance).**<br>Khoảng cách tối đa (block) để ghép 2 mảnh vỡ thành 1 đối tượng.<br>⚠️ **Quan trọng:** Nếu 2 đối tượng đi gần nhau bị dính thành 1 ID 👉 **Giảm xuống `0` hoặc `1`.** |
-| **`DISTANCE_THRESHOLD`** | `70` | **Tốc độ theo dõi (Tracking Speed).**<br>Khoảng cách tối đa (pixel) đối tượng có thể di chuyển giữa 2 frame mà vẫn giữ ID cũ.<br>🔼 **Tăng lên:** Nếu đối tượng di chuyển nhanh.<br>🔽 **Giảm xuống:** Nếu đối tượng đi chậm, tránh bắt nhầm ID. |
-| **`OBJECT_TIMEOUT`** | `6` | **Thời gian chờ (Lost Frames).**<br>Số frame hệ thống chờ đợi khi đối tượng bị khuất tạm thời trước khi xóa ID. |
-| **`STATIONARY_TIMEOUT`** | `300` | **Thời gian xóa đối tượng đứng yên.**<br>Sau 300 frame (khoảng 10-20s) đứng yên, đối tượng sẽ bị xóa khỏi màn hình theo dõi. |
-| **`STATIONARY_THRESHOLD`** | `10` | **Phạm vi rung lắc.**<br>Nếu đối tượng di chuyển trong phạm vi < 10px (VD: ngồi thở nhẹ, lắc lư), hệ thống vẫn coi là Đứng yên `[S]`. |
 
 ---
 
-### 💡 Khắc Phục Sự Cố Nhanh (Quick Troubleshooting)
+## 🔧 Cấu hình chính trong `main.cpp`
+Các tham số chính có thể điều chỉnh theo môi trường thực tế:
 
-* **Vấn đề 1: Hai đối tượng di chuyển gần nhau bị gộp thành 1 khung bao?**
-    * 👉 **Sửa:** Giảm `REGION_MERGE_THRESHOLD` xuống `0`.
+| Tham số | Giá trị mặc định | Ý nghĩa |
+| :--- | :---: | :--- |
+| `BLOCK_SIZE` | `8` | Kích thước mỗi block ảnh dùng để so sánh chuyển động. |
+| `MOTION_THRESHOLD` | `15` | Ngưỡng khác biệt pixel để coi là chuyển động. |
+| `ALERT_THRESHOLD` | `10` | Số block tối thiểu để xác định một vùng chuyển động. |
+| `CONSECUTIVE_FRAMES` | `4` | Số khung hình liên tiếp phải có chuyển động để báo động. |
+| `REGION_MERGE_THRESHOLD` | `3` | Khoảng cách tối đa để gộp các vùng chuyển động gần nhau. |
+| `MIN_OBJECT_SIZE` | `200` | Kích thước nhỏ nhất của đối tượng (pixel). |
+| `MAX_OBJECT_SIZE` | `40000` | Kích thước lớn nhất của đối tượng (pixel). |
+| `DISTANCE_THRESHOLD` | `70` | Khoảng cách di chuyển tối đa giữa 2 frame để giữ ID. |
+| `OBJECT_TIMEOUT` | `6` | Số frame chờ đối tượng bị mất tạm thời trước khi xóa ID. |
+| `STATIONARY_TIMEOUT` | `10` | Số frame để xác định đối tượng đứng yên. |
+| `STATIONARY_THRESHOLD` | `10` | Ngưỡng dao động nhỏ để giữ trạng thái đứng yên. |
 
-* **Vấn đề 2: Báo động giả liên tục dù không có đối tượng?**
-    * 👉 **Sửa:** Tăng `MOTION_THRESHOLD` lên `10` hoặc `15`.
+---
 
-* **Vấn đề 3: Đối tượng di chuyển nhanh bị mất dấu (ID nhảy liên tục)?**
-    * 👉 **Sửa:** Tăng `DISTANCE_THRESHOLD` lên `100`.
+## 🧠 Hoạt động chính của hệ thống
 
-* **Vấn đề 4: Không bắt được đối tượng ở xa (kích thước nhỏ)?**
-    * 👉 **Sửa:** Giảm `MIN_OBJECT_SIZE` xuống `100`.
+1. Khởi tạo AI, màn hình OLED, NVS và camera.
+2. Kết nối WiFi bằng module `wifi_manager`.
+3. Khởi động OTA server và HTTP stream server.
+4. Tạo task phát hiện chuyển động và cập nhật OLED.
+5. Nếu phát hiện chuyển động/đối tượng, hệ thống sẽ phân tích, gán ID và giữ trạng thái.
 
+---
 
-## ⚙️ Cách build & chạy
+## ⚙️ Hướng dẫn build & chạy
+
 ### 1. Kết nối phần cứng
-* Camera: Gắn chặt vào socket trên ESP32-S3 (lưu ý chiều dây cáp).
-* OLED: Kết nối I2C (SDA/SCL).
+- Camera: Gắn chặt vào socket camera trên ESP32-S3.
+- OLED: Kết nối qua I2C (SDA/SCL) và cấp nguồn đúng.
+
 ### 2. Cài đặt môi trường
-* Đảm bảo đã cài đặt ESP-IDF (VS Code Extension hoặc Command Line).
-* Clone dự án về máy tính.
-### 3. Cấu hình WiFi & Project
-Trước khi nạp code,  cần cài đặt tên WiFi và mật khẩu để thiết bị có thể kết nối mạng.
-* Mở terminal tại thư mục dự án và chạy lệnh:
+- Cài ESP-IDF v5.x và thiết lập biến môi trường.
+- Mở terminal trong thư mục dự án.
+
+### 3. Cấu hình WiFi
 ```bash
 idf.py menuconfig
 ```
-* Trong giao diện cấu hình (màn hình xanh), truy cập theo đường dẫn:
-Component config ➡️ WiFi Manager Configuration.
-- Nhập WiFi SSID (Tên mạng).
-- Nhập WiFi Password (Mật khẩu).
-- Nhấn S để lưu lại (Save) và Esc để thoát.
+- Vào `Component config` ➜ `WiFi Manager Configuration`.
+- Cấu hình `ESP_WIFI_SSID` và `ESP_WIFI_PASS`.
+- Lưu và thoát.
 
-Nếu dùng ESP32-S3, set target cho ESP-IDF
+### 4. Build và flash
 ```bash
 idf.py set-target esp32s3
-```
-### 4. Build và Nạp Code
-Sử dụng lệnh sau để biên dịch
-```bash
 idf.py build
-```
-Sử dụng lệnh sau để nạp và xem log (Thay COMxx bằng cổng của bạn):
-```bash
 idf.py -p COMxx flash monitor
 ```
+
+---
+
+## 🛠 Lưu ý
+- Nếu dùng ESP32-S3, đảm bảo target đã được chọn là `esp32s3`.
+- Đảm bảo camera OV2640 hoạt động và kết nối đúng.
+- Nếu không thấy WiFi, kiểm tra cấu hình SSID/Password trong `menuconfig`.
+- OTA server chạy trên cổng `81` và yêu cầu thiết bị đã kết nối WiFi.
+

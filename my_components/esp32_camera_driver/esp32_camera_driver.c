@@ -48,8 +48,9 @@ static camera_config_t camera_config = {
     .xclk_freq_hz = 16000000,           
     .ledc_timer = LEDC_TIMER_0,
     .ledc_channel = LEDC_CHANNEL_0,
-    .pixel_format = PIXFORMAT_GRAYSCALE, // Vẫn giữ nguyên ảnh xám
-    .frame_size = FRAMESIZE_SVGA,         // Mặc định lúc mới bật
+    .pixel_format = PIXFORMAT_JPEG, // Vẫn giữ nguyên ảnh xám
+    .frame_size = FRAMESIZE_UXGA,         // Mặc định lúc mới bật
+    .jpeg_quality = 20,                   // Chất lượng JPEG (0-63), thấp hơn là tốt hơn
     .fb_count = 2,                     
     .fb_location = CAMERA_FB_IN_PSRAM,
     .grab_mode = CAMERA_GRAB_LATEST
@@ -71,8 +72,6 @@ esp_err_t camera_driver_init(void) {
     return ESP_OK;
 }
 
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
 
 // Mượn biến cờ hiệu từ file main.c
 extern volatile bool camera_is_restarting;

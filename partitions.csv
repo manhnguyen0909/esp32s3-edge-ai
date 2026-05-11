@@ -1,6 +1,6 @@
 # Name,   Type, SubType, Offset,  Size, Flags
+# Lưu ý: Các dòng phải cách nhau bằng dấu phẩy
 nvs,      data, nvs,     ,        0x6000,
 phy_init, data, phy,     ,        0x1000,
-otadata,  data, ota,     ,        0x2000,
-ota_0,    app,  ota_0,   ,        3M,
-ota_1,    app,  ota_1,   ,        3M,
+factory,  app,  factory, ,        2M,
+spiffs,   data, spiffs,  ,        1M,

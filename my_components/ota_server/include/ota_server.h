@@ -1,3 +1,3 @@
 #pragma once
-// Khởi động OTA Server
+// Start the OTA server for firmware updates
 void start_ota_server(void);

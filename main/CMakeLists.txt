@@ -1,5 +1,8 @@
+# Tự động tìm và gom TẤT CẢ các file .c và .cpp có trong thư mục main
+file(GLOB_RECURSE srcs "*.c" "*.cpp" "*.cc" "*.S")
+
 idf_component_register(
-    SRCS "main.c" "person_ai/ai_person.cc" "image_utils.c" "person_ai/person_detect_model_data.cc"
+    SRCS ${srcs}
     INCLUDE_DIRS
         "."
         "person_ai"
@@ -14,4 +17,5 @@ idf_component_register(
         ota_server 
         oled_driver
         espressif__esp-tflite-micro
+        JPEGDEC
 )

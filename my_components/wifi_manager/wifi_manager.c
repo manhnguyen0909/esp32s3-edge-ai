@@ -21,7 +21,7 @@ void wifi_manager_init(void) {
 
     wifi_config_t wifi_config = {
         .sta = {
-            // SỬ DỤNG MACRO TỪ KCONFIG (Thêm tiền tố CONFIG_)
+            // Use Kconfig macros for SSID/password configuration
             .ssid = CONFIG_WIFI_SSID,
             .password = CONFIG_WIFI_PASSWORD,
             .threshold.authmode = WIFI_AUTH_WPA2_PSK,
@@ -37,7 +37,7 @@ void wifi_manager_init(void) {
 
     ESP_LOGI(TAG, "Connecting to WiFi SSID: %s", CONFIG_WIFI_SSID);
     int retry = 0;
-    // Sử dụng biến cấu hình số lần thử lại từ Menuconfig luôn
+    // Use the retry value defined in Menuconfig
     while (retry < CONFIG_WIFI_MAX_RETRY) {
         esp_netif_ip_info_t ip_info;
         esp_netif_t* netif = esp_netif_get_handle_from_ifkey("WIFI_STA_DEF");
@@ -59,9 +59,6 @@ void wifi_manager_init(void) {
 
 
 
-//=======================CHẾ ĐỘ PHÁT WIFI=============================
-// #include <string.h>
-// #include "freertos/FreeRTOS.h"
 // #include "freertos/task.h"
 // #include "esp_system.h"
 // #include "esp_wifi.h"
@@ -71,8 +68,8 @@ void wifi_manager_init(void) {
 // #include "esp_mac.h"
 
 // // --- SỬA LẠI ĐOẠN NAY ---
-// #include "esp_netif.h"      // Thư viện mạng ESP
-// #include "lwip/ip_addr.h"   // Thư viện chứa macro IP4_ADDR
+// #include "esp_netif.h"      // ESP network library
+// #include "lwip/ip_addr.h"   // Library containing IP4_ADDR macro
 // #include "lwip/err.h"
 // #include "lwip/sys.h"
 // // --- CẤU HÌNH WIFI AP ---
@@ -127,7 +124,7 @@ void wifi_manager_init(void) {
 //                                                         NULL,
 //                                                         NULL));
 
-//     // 4. Config Wifi (Dùng Macro đã define ở trên)
+//     // 4. Configure WiFi (Use macros defined above)
 //     wifi_config_t wifi_config = {
 //         .ap = {
 //             .ssid = ESP_WIFI_SSID,

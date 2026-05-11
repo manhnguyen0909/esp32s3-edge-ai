@@ -464,6 +464,11 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
+  include("C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/JPEGDEC/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
   include("C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/main/cmake_install.cmake")
 endif()
 

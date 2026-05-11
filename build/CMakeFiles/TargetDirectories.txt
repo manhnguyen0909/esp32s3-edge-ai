@@ -717,6 +717,13 @@ C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/e
 C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/espressif__esp-tflite-micro/CMakeFiles/install.dir
 C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/espressif__esp-tflite-micro/CMakeFiles/install/local.dir
 C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/espressif__esp-tflite-micro/CMakeFiles/install/strip.dir
+C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/JPEGDEC/CMakeFiles/__idf_JPEGDEC.dir
+C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/JPEGDEC/CMakeFiles/edit_cache.dir
+C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/JPEGDEC/CMakeFiles/rebuild_cache.dir
+C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/JPEGDEC/CMakeFiles/list_install_components.dir
+C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/JPEGDEC/CMakeFiles/install.dir
+C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/JPEGDEC/CMakeFiles/install/local.dir
+C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/JPEGDEC/CMakeFiles/install/strip.dir
 C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/main/CMakeFiles/__idf_main.dir
 C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/main/CMakeFiles/edit_cache.dir
 C:/Espressif/project/cadpro_motion_detection_esp32s3_cam_project/build/esp-idf/main/CMakeFiles/rebuild_cache.dir

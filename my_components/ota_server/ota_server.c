@@ -92,7 +92,7 @@ static esp_err_t ota_update_handler(httpd_req_t *req) {
 
     ESP_LOGI(TAG, "Starting OTA update, content_len: %d", remaining);
 
-    // 1. Cấp phát buffer
+    // 1. Allocate temporary receive buffer
     buf = (char *)malloc(buf_size);
     if (!buf) {
         ESP_LOGE(TAG, "Failed to allocate buffer");
@@ -101,7 +101,7 @@ static esp_err_t ota_update_handler(httpd_req_t *req) {
         return ESP_FAIL;
     }
 
-    // 2. Kiểm tra phân vùng hiện hành và tìm phân vùng tiếp theo
+    // 2. Inspect current partition and select the next update partition
     const esp_partition_t *running = esp_ota_get_running_partition();
     ESP_LOGI(TAG, "Running partition: %s", running ? running->label : "null");
 
@@ -189,10 +189,10 @@ static esp_err_t ota_update_handler(httpd_req_t *req) {
     ESP_LOGI(TAG, "OTA Success! Rebooting...");
     httpd_resp_sendstr(req, "OTA Success! Rebooting...");
     
-    // Thêm dòng này để xả hết buffer log ra trước khi chết
+    // Flush stdout before restarting to ensure all log output is transmitted
     fflush(stdout);
     
-    // 7. Reset sau 1 giây
+    // 7. Restart after a short delay
     vTaskDelay(pdMS_TO_TICKS(1000));
     esp_restart();
 
@@ -235,7 +235,7 @@ void start_ota_server(void) {
     
     if (netif) {
         esp_netif_get_ip_info(netif, &ip_info);
-        // IPSTR và IP2STR là macro của ESP để format địa chỉ IP
+        // IPSTR and IP2STR are ESP macros for formatting IP addresses
         ESP_LOGI(TAG, "-------------------------------------------------------------");
         ESP_LOGI(TAG, "🚀 OTA SERVER READY!");
         ESP_LOGI(TAG, "👉 Click to open: http://" IPSTR ":81/ota", IP2STR(&ip_info.ip));
