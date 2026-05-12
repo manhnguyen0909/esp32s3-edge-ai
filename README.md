@@ -1,4 +1,4 @@
-# ESP32 Motion Detection System
+# ESP32 Egde AI System
 ![Status](https://img.shields.io/badge/Status-Active-success)
 ![Platform](https://img.shields.io/badge/ESP--IDF-v5.x-blue)
 ![Hardware](https://img.shields.io/badge/ESP32--S3-PSRAM-red)
