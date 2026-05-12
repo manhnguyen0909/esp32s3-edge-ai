@@ -64,7 +64,7 @@ Dự án phù hợp cho các ứng dụng **giám sát tại biên (IoT Edge)**,
 ## 📁 Cấu trúc thư mục
 
 ```text
-cadpro_motion_detection_esp32s3_cam_project/
+esp32s3_edge_ai/
 ├── build/                       # Thư mục build được sinh bởi ESP-IDF
 ├── main/                        # Mã nguồn chính và logic ứng dụng
 │   ├── main.cpp                 # Entry point và điều phối các component
